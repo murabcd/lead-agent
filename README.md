@@ -1,4 +1,4 @@
-<a href="lead-agent-form.vercel.app">
+<a href="https://lead-agent-form.vercel.app">
   <img alt="An inbound lead qualification and research agent built with Next.js." src="./public/preview/lead-agent.png">
   <h1 align="center">Lead Agent</h1>
 </a>
