@@ -9,6 +9,7 @@ import { z } from "zod";
 import { env } from "@/env";
 import {
 	getEmailPrompt,
+	getEmailTranslationPrompt,
 	getLanguageDetectionPrompt,
 	getQualificationPrompt,
 	getTranslationPrompt,
@@ -113,9 +114,27 @@ export async function humanFeedback(
 		}
 	}
 
+	let translatedEmail = email;
+
+	// Translate email if language is not English
+	if (targetLanguage !== "en") {
+		try {
+			console.log(`🌐 Translating email to ${targetLanguage}...`);
+			const { text } = await generateText({
+				model: "openai/gpt-5",
+				prompt: getEmailTranslationPrompt(email, targetLanguage),
+				maxRetries: 2,
+			});
+			translatedEmail = text.trim();
+			console.log(`✅ Email translated to ${targetLanguage}`);
+		} catch (error) {
+			console.error("⚠️  Error translating email, using original:", error);
+		}
+	}
+
 	const message =
 		`<b>📋 New Lead Qualification</b>\n\n` +
-		`<b>📧 Email:</b>\n<code>${escapeHtmlContent(email)}</code>\n\n` +
+		`<b>📧 Email:</b>\n<code>${escapeHtmlContent(translatedEmail)}</code>\n\n` +
 		`<b>🏷️ Category:</b> <code>${escapeHtmlContent(qualification.category)}</code>\n\n` +
 		`<b>💭 Reason:</b>\n${escapeHtmlContent(qualification.reason)}\n\n` +
 		`<b>🔍 Research:</b>\n${escapeHtmlContent(research)}\n\n` +
@@ -123,11 +142,13 @@ export async function humanFeedback(
 
 	let translatedMessage = message;
 
-	if (targetLanguage !== "en") {
+	// If Russian: translate entire message (email + headers + other content)
+	// If NOT Russian but not English: only email is translated (already done above)
+	if (targetLanguage === "ru") {
 		try {
-			console.log(`🌐 Translating entire message to ${targetLanguage}...`);
+			console.log(`🌐 Translating entire message to Russian...`);
 			translatedMessage = await translateMessage(message, targetLanguage);
-			console.log(`✅ Entire message translated to ${targetLanguage}`);
+			console.log(`✅ Entire message translated to Russian`);
 		} catch (error) {
 			console.error("⚠️  Error translating message, using original:", error);
 		}

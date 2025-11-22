@@ -90,6 +90,25 @@ ${message}`;
 }
 
 /**
+ * Prompt for translating only email content to a target language
+ */
+export function getEmailTranslationPrompt(
+	email: string,
+	targetLanguage: string,
+): string {
+	return `Translate ONLY the email content below to ${targetLanguage}. 
+
+CRITICAL RULES:
+1. Translate ONLY the email text content
+2. Preserve ALL HTML tags exactly as they are if present
+3. Preserve the exact structure and line breaks
+4. Do NOT translate any other text, only the email content itself
+
+Email to translate:
+${email}`;
+}
+
+/**
  * System prompt for the research agent
  */
 export const RESEARCH_AGENT_SYSTEM_PROMPT = `
