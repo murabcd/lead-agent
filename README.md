@@ -7,7 +7,7 @@
   Lead qualification and research agent built with Next.js, AI SDK, Workflow DevKit, and Telegram Bot API.
 </p>
 
-The agent captures a lead in a contact sales form and then kicks off a qualification workflow and deep research agent. It integrates with Telegram to send and receive messages for human-in-the-loop feedback.
+The agent captures a lead in a contact sales form and then kicks off a qualification workflow. It integrates with Telegram to send and receive messages for human-in-the-loop feedback.
 
 <p align="center">
   <a href="#features"><strong>Features</strong></a> ·

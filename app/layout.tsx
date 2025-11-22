@@ -19,7 +19,58 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
 	title: "Lead Agent",
 	description:
-		"Lead Agent is a tool that helps you find leads and convert them into customers.",
+		"Lead qualification and research agent built with Next.js, AI SDK, Workflow DevKit, and Telegram Bot API.",
+	keywords: [
+		"lead qualification",
+		"lead research",
+		"AI agent",
+		"Next.js",
+		"workflow",
+		"telegram bot",
+		"lead generation",
+	],
+	authors: [{ name: "Vercel Labs" }],
+	creator: "Vercel Labs",
+	publisher: "Vercel Labs",
+	metadataBase: new URL(
+		process.env.NEXT_PUBLIC_URL || "https://lead-agent-form.vercel.app",
+	),
+	openGraph: {
+		type: "website",
+		locale: "en_US",
+		url: "/",
+		title: "Lead Agent",
+		description:
+			"Lead qualification and research agent built with Next.js, AI SDK, Workflow DevKit, and Telegram Bot API.",
+		siteName: "Lead Agent",
+		images: [
+			{
+				url: "/api/og",
+				width: 1200,
+				height: 630,
+				alt: "Lead Agent - Inbound lead qualification and research agent",
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Lead Agent",
+		description:
+			"Lead qualification and research agent built with Next.js, AI SDK, Workflow DevKit, and Telegram Bot API.",
+		images: ["/api/og"],
+		creator: "@vercel",
+	},
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			"max-video-preview": -1,
+			"max-image-preview": "large",
+			"max-snippet": -1,
+		},
+	},
 };
 
 export const viewport: Viewport = {
